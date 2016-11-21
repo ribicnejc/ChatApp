@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1026434743549",
+    "firebase_url": "https://chatapp-4ab00.firebaseio.com",
+    "project_id": "chatapp-4ab00",
+    "storage_bucket": "chatapp-4ab00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026434743549:android:2b323907c1e7d6d2",
+        "android_client_info": {
+          "package_name": "com.ribicnejc.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026434743549-apa0rd68jhmv05gb3o500bd4ltmeuujq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ribicnejc.chatapp",
+            "certificate_hash": "D530E2CEAE53D5F9DACBCD5606D99235C3B2F094"
+          }
+        },
+        {
+          "client_id": "1026434743549-ui73vl1t1p9pr7tgdhb8ovrcc50gjrpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt3Kv2BqdqxaHSp52oEGdyeAKDGas5a7s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026434743549-ui73vl1t1p9pr7tgdhb8ovrcc50gjrpg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
