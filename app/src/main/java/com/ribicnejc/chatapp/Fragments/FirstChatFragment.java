@@ -8,10 +8,14 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ribicnejc.chatapp.Objects.ChatMessage;
 import com.ribicnejc.chatapp.R;
@@ -73,28 +77,18 @@ public class FirstChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final View view = inflater.inflate(R.layout.fragment_first_chat, container, false);
+        ImageButton btnSend = (ImageButton) view.findViewById(R.id.message_send);
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                EditText editText = (EditText) getView().findViewById(R.id.input);
-
-                FirebaseDatabase.getInstance()
-                        .getReference("Chat")
-                        .push()
-                        .setValue(new ChatMessage(editText.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getDisplayName())                        );
-
-                // Clear the input
+            public void onClick(View view2) {
+                EditText editText = (EditText) view.findViewById(R.id.input);
+                sendMessage(editText.getText().toString());
                 editText.setText("");
             }
         });
-*/
-
-        View view = inflater.inflate(R.layout.fragment_first_chat, container, false);
-        // Inflate the layout for this fragment
         displayChat(view);
-        return view;//inflater.inflate(R.layout.fragment_first_chat, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -131,6 +125,14 @@ public class FirstChatFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
+    public void sendMessage(String message){
+
+        FirebaseDatabase.getInstance()
+                .getReference("Chat")
+                .push()
+                .setValue(new ChatMessage(message, FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
+    }
 
     public void displayChat(View view){
         ListView listOfMessages = (ListView) view.findViewById(R.id.list_of_messages);
