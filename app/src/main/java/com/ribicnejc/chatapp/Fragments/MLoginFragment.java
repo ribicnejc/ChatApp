@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,9 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ribicnejc.chatapp.Activities.LoginRegisterActivity;
 import com.ribicnejc.chatapp.Activities.MainChatActivity;
+import com.ribicnejc.chatapp.Objects.User;
 import com.ribicnejc.chatapp.R;
-
-import java.lang.reflect.Array;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -151,7 +149,7 @@ public class MLoginFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void attemptLogin(String email, String password){
+    public void attemptLogin(final String email, final String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -165,6 +163,8 @@ public class MLoginFragment extends Fragment {
                             Log.w("TAG", "signInWithEmail:failed", task.getException());
                             Toast.makeText(getContext(), "could not login", Toast.LENGTH_SHORT).show();
                         }else{
+                            User.email = email;
+                            User.password = password;
                             Intent intent = new Intent(getContext(), MainChatActivity.class);
                             startActivity(intent);
                         }

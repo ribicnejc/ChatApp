@@ -1,19 +1,13 @@
 package com.ribicnejc.chatapp.Objects;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class User {
-
-    public String username;
-    public String firstName;
-    public String lastName;
-
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
-
-    public User(String username, String firstName, String lastName) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
+    public static String username;
+    public static String name;
+    public static String email;
+    public static String password;
+    public static FirebaseUser firebaseUser;
+    public static FirebaseAuth firebaseAuth;
 }

@@ -16,11 +16,14 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.ribicnejc.chatapp.Activities.MainChatActivity;
+import com.ribicnejc.chatapp.Objects.User;
 import com.ribicnejc.chatapp.R;
 
 /**
@@ -84,19 +87,24 @@ public class RegisterFragment extends Fragment {
         mRegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AutoCompleteTextView email = (AutoCompleteTextView) view2.findViewById(R.id.register_email);
-                EditText password = (EditText) view2.findViewById(R.id.register_password);
+                final AutoCompleteTextView email = (AutoCompleteTextView) view2.findViewById(R.id.register_email);
+                final EditText password = (EditText) view2.findViewById(R.id.register_password);
+                final EditText name = (EditText) view2.findViewById(R.id.register_name);
+//                final EditText username = (EditText) view2.findViewById(R.id.register_username);
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                           setData();
+                        if (task.isSuccessful()) {
+                            User.email = email.getText().toString();
+                            User.password = password.getText().toString();
+                            User.name = name.getText().toString();
+//                            User.username = username.getText().toString();
+                            setData();
                         }
                     }
                 });
             }
         });
-
 
 
         return view2;
@@ -136,18 +144,25 @@ public class RegisterFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public void setData(){
+    public void setData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        AuthCredential credential = EmailAuthProvider.getCredential(User.email, User.password);
+        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                //TODO dont allow to continue if task is false
+            }
+        });
+        //TODO why when action doesnt work in debug its working!!!
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName("Nejc Ribic").build();
+                .setDisplayName(User.name)
+                .build();
         user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Intent intent = new Intent(getContext(), MainChatActivity.class);
                     startActivity(intent);
-                }else{
-                    int x = 3;
                 }
             }
         });

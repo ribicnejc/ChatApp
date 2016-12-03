@@ -361,11 +361,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             String username = usernameField.getText().toString();
                             String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            User aUser = new User(username, "Nejc", "Ribic");
+                            //User aUser = new User(username, "Nejc", "Ribic");
 
-                            FirebaseDatabase.getInstance().getReference("Users").child(userID).child("profile").setValue(aUser);
-
-                            FirebaseDatabase.getInstance().getReference("OnlineUsers").setValue(aUser);
+//                            FirebaseDatabase.getInstance().getReference("Users").child(userID).child("profile").setValue(aUser);
+//
+//                            FirebaseDatabase.getInstance().getReference("OnlineUsers").setValue(aUser);
 
                             Intent intent = new Intent(getActivity().getBaseContext(), MainChatActivity.class);
                             startActivity(intent);

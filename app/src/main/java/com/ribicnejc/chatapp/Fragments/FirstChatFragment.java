@@ -18,6 +18,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ribicnejc.chatapp.Objects.ChatMessage;
+import com.ribicnejc.chatapp.Objects.User;
 import com.ribicnejc.chatapp.R;
 
 /**
@@ -131,7 +132,7 @@ public class FirstChatFragment extends Fragment {
         FirebaseDatabase.getInstance()
                 .getReference("Chat")
                 .push()
-                .setValue(new ChatMessage(message, FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
+                .setValue(new ChatMessage(message, User.firebaseUser.getDisplayName()));
     }
 
     public void displayChat(View view){
