@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ribicnejc.chatapp.Fragments.MenuFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+        android:background="@mipmap/bg">
+
+        <Button
+            android:text="General Chat"
+            android:textColor="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_general_chat"
+            android:layout_weight="0.2"
+            android:background="@drawable/round_button"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/colorPrimaryDark" />
+
+        <Button
+            android:text="Add Friend"
+            android:textColor="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_friend"
+            android:layout_weight="0.2"
+            android:background="@drawable/round_button"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/colorPrimaryDark" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.6"
+            android:background="@mipmap/background_character" />
+    </LinearLayout>
+</FrameLayout>
