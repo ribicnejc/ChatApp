@@ -133,10 +133,11 @@ public class FirstChatFragment extends Fragment {
                 .getReference("Chat")
                 .push()
                 .setValue(new ChatMessage(message, User.firebaseUser.getDisplayName()));
+
     }
 
     public void displayChat(View view){
-        ListView listOfMessages = (ListView) view.findViewById(R.id.list_of_messages);
+        final ListView listOfMessages = (ListView) view.findViewById(R.id.list_of_messages);
         adapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.message, FirebaseDatabase.getInstance().getReference("Chat")) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
@@ -154,6 +155,8 @@ public class FirstChatFragment extends Fragment {
             }
         };
         listOfMessages.setAdapter(adapter);
+
+//        listOfMessages.setSelection(adapter.getCount() - 1);
     }
 
     public interface OnFirstChatFragmentInteractionListener {

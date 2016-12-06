@@ -23,6 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="16dp"
         android:layout_weight="11"
+        android:stackFromBottom="true"
         android:divider="@android:color/transparent"
         android:dividerHeight="16dp" />
 

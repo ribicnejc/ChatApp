@@ -16,6 +16,7 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ribicnejc.chatapp.Fragments.AddFriendFragment;
 import com.ribicnejc.chatapp.Fragments.FirstChatFragment;
 import com.ribicnejc.chatapp.Fragments.MenuFragment;
 import com.ribicnejc.chatapp.Fragments.RegisterFragment;
@@ -24,7 +25,8 @@ import com.ribicnejc.chatapp.R;
 
 public class MainChatActivity extends AppCompatActivity implements
         FirstChatFragment.OnFirstChatFragmentInteractionListener,
-        MenuFragment.OnMenuFragmentInteractionListener {
+        MenuFragment.OnMenuFragmentInteractionListener,
+        AddFriendFragment.OnAddFriendFragmentInteractionListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +60,13 @@ public class MainChatActivity extends AppCompatActivity implements
     }
 
     public void startAddFriendFragment(){
-
+        Toast.makeText(this, "Add new Friend", Toast.LENGTH_SHORT).show();
+        Fragment fragment = new AddFriendFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 
     public void startGeneralChatFragment() {
-        Toast.makeText(this, "general fragment started", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "General chat", Toast.LENGTH_SHORT).show();
         Fragment fragment = new FirstChatFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
