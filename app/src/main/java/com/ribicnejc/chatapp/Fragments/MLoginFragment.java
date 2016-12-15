@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,7 +42,8 @@ public class MLoginFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private ProgressBar progressBar;
+    private ScrollView scrollView;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -90,6 +93,10 @@ public class MLoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar = (ProgressBar) view2.findViewById(R.id.login_progress1);
+                progressBar.setVisibility(View.VISIBLE);
+                scrollView = (ScrollView) view2.findViewById(R.id.login_form1);
+                scrollView.setVisibility(View.GONE);
                 AutoCompleteTextView email = (AutoCompleteTextView) view2.findViewById(R.id.fragment_email);
                 EditText password = (EditText) view2.findViewById(R.id.fragment_password);
                 attemptLogin(email.getText().toString(), password.getText().toString());
@@ -156,7 +163,8 @@ public class MLoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d("TAG", "signInWithEmail:onComplete:" + task.isSuccessful());
-
+                        scrollView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.

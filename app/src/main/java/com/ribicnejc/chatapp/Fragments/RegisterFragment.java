@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,6 +45,8 @@ public class RegisterFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+    private ScrollView scrollView;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -90,6 +94,10 @@ public class RegisterFragment extends Fragment {
         mRegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar = (ProgressBar) view2.findViewById(R.id.register_progress);
+                progressBar.setVisibility(View.VISIBLE);
+                scrollView = (ScrollView) view2.findViewById(R.id.register_form);
+                scrollView.setVisibility(View.GONE);
                 final AutoCompleteTextView email = (AutoCompleteTextView) view2.findViewById(R.id.register_email);
                 final EditText password = (EditText) view2.findViewById(R.id.register_password);
                 final EditText name = (EditText) view2.findViewById(R.id.register_name);
@@ -160,6 +168,8 @@ public class RegisterFragment extends Fragment {
                 user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        progressBar.setVisibility(View.GONE);
+                        scrollView.setVisibility(View.VISIBLE);
                         if (task.isSuccessful()) {
                             FirebaseDatabase.getInstance()
                                     .getReference("Users")
