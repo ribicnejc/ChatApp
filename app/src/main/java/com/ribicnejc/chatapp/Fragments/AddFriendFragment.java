@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.FirebaseDatabase;
+import com.ribicnejc.chatapp.Objects.ChatMessage;
+import com.ribicnejc.chatapp.Objects.UserProfile;
 import com.ribicnejc.chatapp.R;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,7 @@ public class AddFriendFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FirebaseListAdapter<UserProfile> adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,9 +76,7 @@ public class AddFriendFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_friend, container, false);
-
-
-
+        displayUsers(v);
         return v;
     }
 
@@ -109,5 +117,19 @@ public class AddFriendFragment extends Fragment {
     public interface OnAddFriendFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void displayUsers(View view){
+        final ListView listOfMessages = (ListView) view.findViewById(R.id.list_view_add_friend);
+        adapter = new FirebaseListAdapter<UserProfile>(getActivity(), UserProfile.class, R.layout.friend, FirebaseDatabase.getInstance().getReference("Users")) {
+            @Override
+            protected void populateView(View v, UserProfile model, int position) {
+                TextView friendName = (TextView) v.findViewById(R.id.textViewAddFriendName);
+                TextView friendEmail = (TextView) v.findViewById(R.id.textViewEmailAddFriend);
+                friendName.setText(model.getName());
+                friendEmail.setText(model.getEmail());
+            }
+        };
+        listOfMessages.setAdapter(adapter);
     }
 }

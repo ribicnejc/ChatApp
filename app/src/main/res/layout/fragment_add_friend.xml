@@ -2,11 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ribicnejc.chatapp.Fragments.AddFriendFragment"
-    android:background="@mipmap/bg">
+    android:background="@mipmap/bg"
+    tools:context="com.ribicnejc.chatapp.Fragments.AddFriendFragment">
 
 
     <ListView
+        android:id="@+id/list_view_add_friend"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

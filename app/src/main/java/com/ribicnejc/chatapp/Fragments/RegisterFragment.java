@@ -24,7 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ribicnejc.chatapp.Activities.MainChatActivity;
+import com.ribicnejc.chatapp.Objects.ChatMessage;
 import com.ribicnejc.chatapp.Objects.User;
+import com.ribicnejc.chatapp.Objects.UserProfile;
 import com.ribicnejc.chatapp.R;
 
 /**
@@ -158,6 +160,10 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            FirebaseDatabase.getInstance()
+                                    .getReference("Users")
+                                    .push()
+                                    .setValue(new UserProfile(User.name, User.email, true));
                             Intent intent = new Intent(getContext(), MainChatActivity.class);
                             startActivity(intent);
                         }
