@@ -171,10 +171,11 @@ public class RegisterFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         scrollView.setVisibility(View.VISIBLE);
                         if (task.isSuccessful()) {
+
                             FirebaseDatabase.getInstance()
                                     .getReference("Users")
                                     .push()
-                                    .setValue(new UserProfile(User.name, User.email, true));
+                                    .setValue(new UserProfile(User.name, User.email, user.getUid(), true));
                             Intent intent = new Intent(getContext(), MainChatActivity.class);
                             startActivity(intent);
                         }
@@ -184,6 +185,7 @@ public class RegisterFragment extends Fragment {
         });
 
     }
+
 
     public interface OnRegisterFragmentInteractionListener {
         // TODO: Update argument type and name

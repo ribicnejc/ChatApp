@@ -5,11 +5,13 @@ public class UserProfile {
     private String name;
     private boolean online;
     private String email;
+    private String uid;
 
-    public UserProfile(String name, String email, boolean online){
+    public UserProfile(String name, String email, String uid, boolean online){
         this.name = name;
         this.online = online;
         this.email = email;
+        this.uid = uid;
     }
 
     public UserProfile(){}
@@ -36,5 +38,13 @@ public class UserProfile {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

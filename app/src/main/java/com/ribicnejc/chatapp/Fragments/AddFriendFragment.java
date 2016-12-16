@@ -8,8 +8,10 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
@@ -121,6 +123,13 @@ public class AddFriendFragment extends Fragment {
 
     public void displayUsers(View view){
         final ListView listOfMessages = (ListView) view.findViewById(R.id.list_view_add_friend);
+        listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                UserProfile userProfile = (UserProfile) listOfMessages.getItemAtPosition(i);
+                Toast.makeText(getContext(), userProfile.getUid(), Toast.LENGTH_SHORT).show();
+            }
+        });
         adapter = new FirebaseListAdapter<UserProfile>(getActivity(), UserProfile.class, R.layout.friend, FirebaseDatabase.getInstance().getReference("Users")) {
             @Override
             protected void populateView(View v, UserProfile model, int position) {
